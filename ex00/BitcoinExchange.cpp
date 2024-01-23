@@ -34,19 +34,56 @@ void BitcoinExchange::read_data(){
 			exit(2);
 		}
 }
-void check_line(std::string key, std::string __unused value){
+int check_line(std::string key){
 	if(key.length() != 10 || (key[4] != '-' || key[7] != '-'))
-		throw "Error bad argument ";
+		return 1;
 	for(size_t i = 0; i < key.length(); i++){
 		if (i == 4 || i == 7)
 			i++;
 		if(key[i] > '9' || key[i] < '0'){
-			throw "Error: bad input ";
+			return 1;
 		}
 	}
+	int yr = std::strtod(key.substr(0, 4).c_str(), NULL);
+	int mo = std::strtod(key.substr(5, 2).c_str(), NULL);
+	int dy = std::strtod(key.substr(8, 2).c_str(), NULL);
+	if (!(yr >= 2009 && yr <= 2024 && mo >=1 && mo <= 12 && dy >= 1 && dy <= 31))
+		return (1);
+	return 0;
+}
+
+size_t ft_strlen(char *str){
+	size_t i = 0;
+	while (str[i])
+		i++;
+	return i;
+}
+double check_value(std::string value){
+	for (size_t i = 0; i < value.length(); i++){
+		if(value[i] != ' ' && !isdigit(value[i]) && value[i] != '.' && value[i] != '-'){
+			std::cerr << "Error: bad input => " + value << std::endl;
+			return(-1);
+		}
+	}
+	char *end = NULL;
+	double val = std::strtod(value.c_str(), &end);
+	if (ft_strlen(end) != 0){
+		std::cerr << "Error: bad input => " + value << std::endl;
+		return(-1);
+	}
+	if (val < 0){
+		std::cerr << "Error: not a positive number" << std::endl;
+		return(-1);
+	}
+	if(val > 1000){
+		std::cerr << "Error: too large a numbe" << std::endl;
+		return(-1);
+	}
+	return(val);
 }
 
 void BitcoinExchange::read_input(std::string &av){
+	// data t;
 	std::ifstream input(av.c_str());
 	std::string line;
 	std::getline(input, line);
@@ -62,13 +99,29 @@ void BitcoinExchange::read_input(std::string &av){
 		}
 		std::string key = line.substr(0, pos - 1);
 		std::string value = line.substr(pos + 2);
-		try{
-			check_line(key, value);
-		}
-		catch(const char* e){
-			std::cout << e << std::endl;
+		// try{	
+		if(check_line(key)){
+			std::cerr << "Error: bad input => " + key << std::endl;
 			continue;
 		}
+		if (check_value(value) == -1)
+			continue;
+		std::map<std::string, std::string>::iterator it = mp.lower_bound(key);
+		if (it->first == key)
+		{
+			double sec = std::strtod(it->second.c_str() , NULL);
+			double vl = std::strtod(value.c_str() , NULL);
+			std::cout << key << " => " << value << " = " << sec * vl << std::endl;
+		}
+		else{
+			--it;
+			double sec = std::strtod(it->second.c_str() , NULL);
+			double vl = std::strtod(value.c_str() , NULL);
+			std::cout << key << " => " << value << " = " << sec * vl << std::endl;
+		}
+		
 	}
-}
+
+	}
+// }
 

@@ -8,6 +8,12 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+struct data
+{
+    int year;
+    int mounth;
+    int day;
+};
 
 class BitcoinExchange{
 	public:
