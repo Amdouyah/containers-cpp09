@@ -22,12 +22,10 @@ void BitcoinExchange::read_data(){
 					mp[key] = value;
 				}
 				else{
-					std::cout << "Error miroka" << std::endl;
+					std::cout << "Error" << std::endl;
 					exit(2);
 				}
 			}
-			// for (std::map<std::string, std::string>::iterator it = mp.begin(); it != mp.end(); ++it)
-           	// 	 std::cout << "Date: " << it->first << ", Value: " << it->second << std::endl;
 		}
 		else{
 			std::cerr << "Error open file data.csv "<< std::endl;
