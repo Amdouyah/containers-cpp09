@@ -3,8 +3,9 @@
 int main(int ac, char **av){
 	if (ac > 1){
 		try{
-			std::vector<int> vec;
-			check_errors(ac, av, vec);
+			PmergeMe test;
+
+			test.launch(ac, av);
 		}
 		catch(std::exception &e){
 			std::cout << e.what() << std::endl;

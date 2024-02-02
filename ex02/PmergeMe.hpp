@@ -5,7 +5,23 @@
 #include <vector>
 
 
-void check_errors(int ac, char **av, std::vector<int> &vec);
-int check_aruments(std::string av);
+class PmergeMe {
+	public:
+		typedef std::vector<int>	vec1;
+		typedef	std::vector< vec1 >	vec2;
+
+	private:
+		vec1 data;
+		vec2 arr;
+	public:
+		PmergeMe();
+		// PmergeMe(const PmergeMe& copy);
+		// PmergeMe& operator=(const PmergeMe& copy);
+		~PmergeMe();
+
+		void	launch(int ac, char **av);
+		vec1	merge();
+		void	sort();
+};
 
 #endif
