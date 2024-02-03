@@ -109,11 +109,35 @@ PmergeMe::vec1 PmergeMe::merge() {
 }
 
 void PmergeMe::sort(){
-	print(arr);
+	// print(arr);
 	vec1 tmp;
 	tmp = merge();
 	if(arr.size() > 1){
 		sort();
 	}
-	print(arr);
+	insert(tmp);
+	// print(arr);
+}
+
+void PmergeMe::splt(){
+	vec2 newarr;
+	vec1 tmp1;
+	vec1 tmp2;
+	for(size_t i = 0; i < arr.size(); i++){
+		for(size_t j = 0 ; j < (arr[i].size()); j++){
+			if(j < arr[i].size() / 2)
+				tmp1.push_back(arr[i][j]);
+			else
+				tmp2.push_back(arr[i][j]);
+		}
+		newarr.push_back(tmp1);
+		newarr.push_back(tmp2);
+		tmp1.clear();
+		tmp2.clear();
+	}
+	arr = newarr;
+}
+
+void PmergeMe::insert(vec1 __unused tmp){
+	splt();
 }
