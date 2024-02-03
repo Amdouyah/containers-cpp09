@@ -23,7 +23,6 @@ class PmergeMe {
 		vec1	merge();
 		void	sort();
 		void 	insert(vec1 tmp);
-		void 	splt();
 };
 
 #endif

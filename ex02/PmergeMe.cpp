@@ -116,13 +116,13 @@ void PmergeMe::sort(){
 		sort();
 	}
 	insert(tmp);
-	// print(arr);
+	print(arr);
 }
 
-void PmergeMe::splt(){
-	vec2 newarr;
-	vec1 tmp1;
-	vec1 tmp2;
+static void spltvec(PmergeMe::vec2 &arr){
+	PmergeMe::vec2 newarr;
+	PmergeMe::vec1 tmp1;
+	PmergeMe::vec1 tmp2;
 	for(size_t i = 0; i < arr.size(); i++){
 		for(size_t j = 0 ; j < (arr[i].size()); j++){
 			if(j < arr[i].size() / 2)
@@ -139,5 +139,5 @@ void PmergeMe::splt(){
 }
 
 void PmergeMe::insert(vec1 __unused tmp){
-	splt();
+	spltvec(arr);
 }
