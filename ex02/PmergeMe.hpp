@@ -22,7 +22,7 @@ class PmergeMe {
 		void	launch(int ac, char **av);
 		vec1	merge();
 		void	sort();
-		void 	insert(vec1 tmp);
+		void 	insert_(vec1 tmp);
 };
 
 #endif
