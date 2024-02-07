@@ -18,6 +18,26 @@ PmergeMe::~PmergeMe() {
 int count = 0;
 
 void	print(PmergeMe::vec2 arr);
+
+// static int check_dup(std::string av){
+// 	for(size_t i = 0; i < av.length(); i++){
+// 		for(size_t j = i + 1; j < av.length(); j++){
+// 			if(av[i] == av[j])
+// 				return 0;
+// 		}
+// 	}
+// 	return 1;
+// }
+
+void check_dup(PmergeMe::vec1 vc){
+	for(size_t i = 0; i < vc.size(); i++){
+		for(size_t j = i + 1; j < vc.size(); j++){
+			if(vc[i] == vc[j])
+				throw std::invalid_argument("Error wrong argument");
+		}
+	}
+}
+
 static int check_aruments(std::string av){
 	for (size_t i = 0; i < av.length(); i++){
 		if (!isdigit(av[i]) && av[i] != ' ')
@@ -37,6 +57,7 @@ static void check_errors(int ac, char **av, std::vector<int> &vec){
 			else
 				throw std::invalid_argument("Error wrong argument");
 	}
+
 	
 }
 
@@ -51,9 +72,9 @@ static	void mainfunc(PmergeMe::vec1 &vec, PmergeMe::vec2 &Secvec) {
 
 void	PmergeMe::launch(int ac, char **av) {
 	check_errors(ac, av, data);
+	check_dup(data);
 	mainfunc(data, arr);
 	sort();
-	// puts("here");
 	print(arr);
 }
 
@@ -145,19 +166,29 @@ bool	compare(PmergeMe::vec1 v1, PmergeMe::vec1 v2){
 	count++;
 	return (v1.back() < v2.back());
 }
+void update(PmergeMe::vec2::iterator& it, std::vector< std::pair<PmergeMe::vec2::iterator, PmergeMe::vec1> >& pend_pair){
+	size_t i = 0;
+    for (i = 0; i < pend_pair.size(); ++i) {
+        if (pend_pair[i].first >= it)
+            ++pend_pair[i].first;
+    }
+}
 
 void PmergeMe::insert_(vec1 tmp){
 	vec2 main;
 	vec2 pend;
+
 	std::vector< std::pair<vec2::iterator, vec1> > pend_pair;
 	spltvec(arr);
+
+	main.reserve(arr.size());
 	main.push_back(arr[0]);
 	main.push_back(arr[1]);
-
+	
 	vec2::iterator t;
 	std::pair<vec2::iterator, vec1> tmp1;
 
-	for(size_t i =2; i < arr.size(); i+=2 ){
+	for(size_t i = 2; i < arr.size(); i += 2 ){
 		t = main.insert(main.end(), arr[i+1]);
 		tmp1.first = t;
 		tmp1.second = arr[i];
@@ -168,10 +199,14 @@ void PmergeMe::insert_(vec1 tmp){
 		tmp1.second = tmp;
 		pend_pair.push_back(tmp1);
 	}
+
 	vec2::iterator it;
 	for (size_t i = 0; i < pend_pair.size(); i++) {
 		it = std::lower_bound(main.begin(), pend_pair[i].first, pend_pair[i].second, compare);
 		main.insert(it, pend_pair[i].second);
+		update(it, pend_pair);
 	}
 	arr = main;
-} // update the iterators of the  pend_pair.first's;
+} 
+
+ 
