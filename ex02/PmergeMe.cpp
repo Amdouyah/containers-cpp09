@@ -1,35 +1,40 @@
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe() {
-
 }
 
-// PmergeMe::PmergeMe(const PmergeMe& copy) {
-
-// }
-
-// PmergeMe& PmergeMe::operator=(const PmergeMe& copy) {
-
-// }
-
+PmergeMe::PmergeMe(const PmergeMe& copy) {
+	*this = copy;
+}
+PmergeMe& PmergeMe::operator=(const PmergeMe& copy) {
+	this->data = copy.data;
+	this->arr = copy.arr;
+	this->Larr = copy.Larr;
+	this->Ldata = copy.Ldata;
+	return *this;
+}
 PmergeMe::~PmergeMe() {
 
 }
+
 int count = 0;
 
-void	print(PmergeMe::vec2 arr);
+static void	print(PmergeMe::vec2 arr) {
+	std::cout << "VecofVec";
+	for (int i = 0; i < (int)arr.size(); i++) {
+		arr[i];
+		arr[i+1];
+		std::cout << " [";
+		for (int j = 0; j < (int)arr[i].size(); j++) {
+			std::cout << " " << arr[i][j];
+		}
+		std::cout << " ]";
+	}
+	std::cout << std::endl;
+	std::cerr << "count == " << count << "\n";
+}
 
-// static int check_dup(std::string av){
-// 	for(size_t i = 0; i < av.length(); i++){
-// 		for(size_t j = i + 1; j < av.length(); j++){
-// 			if(av[i] == av[j])
-// 				return 0;
-// 		}
-// 	}
-// 	return 1;
-// }
-
-void check_dup(PmergeMe::vec1 vc){
+static void check_dup(PmergeMe::vec1 vc){
 	for(size_t i = 0; i < vc.size(); i++){
 		for(size_t j = i + 1; j < vc.size(); j++){
 			if(vc[i] == vc[j])
@@ -57,7 +62,6 @@ static void check_errors(int ac, char **av, std::vector<int> &vec){
 			else
 				throw std::invalid_argument("Error wrong argument");
 	}
-
 	
 }
 
@@ -79,7 +83,7 @@ void	PmergeMe::launch(int ac, char **av) {
 }
 
 
-PmergeMe::vec1 swapvec(PmergeMe::vec1 vec1, PmergeMe::vec1 vec2){
+static PmergeMe::vec1 swapvec(PmergeMe::vec1 vec1, PmergeMe::vec1 vec2){
 	PmergeMe::vec1 vec;
 	if (vec1.back() < vec2.back()){
 		count++;
@@ -102,20 +106,7 @@ PmergeMe::vec1 swapvec(PmergeMe::vec1 vec1, PmergeMe::vec1 vec2){
 	return vec;
 }
 
-void	print(PmergeMe::vec2 arr) {
-	std::cout << "VecofVec";
-	for (int i = 0; i < (int)arr.size(); i++) {
-		arr[i];
-		arr[i+1];
-		std::cout << " [";
-		for (int j = 0; j < (int)arr[i].size(); j++) {
-			std::cout << " " << arr[i][j];
-		}
-		std::cout << " ]";
-	}
-	std::cout << std::endl;
-	std::cerr << "count == " << count << "\n";
-}
+
 
 PmergeMe::vec1 PmergeMe::merge() {
 	vec1 tmp;
@@ -162,7 +153,7 @@ static void spltvec(PmergeMe::vec2 &arr){
 	arr = newarr;
 }
 
-bool	compare(PmergeMe::vec1 v1, PmergeMe::vec1 v2){
+static bool	compare(PmergeMe::vec1 v1, PmergeMe::vec1 v2){
 	count++;
 	return (v1.back() < v2.back());
 }
@@ -207,6 +198,4 @@ void PmergeMe::insert_(vec1 tmp){
 		update(it, pend_pair);
 	}
 	arr = main;
-} 
-
- 
+}
