@@ -9,10 +9,5 @@ int main(int ac ,char **av){
 		catch(std::exception &e){
 			std::cout << e.what() << std::endl;
 		}
-		// if(check_(str) == 1){
-		// 	std::cout << "true" << std::endl;
-		// }
-		// else
-		// 	std::cout << "false" << std::endl;
 	}
 }

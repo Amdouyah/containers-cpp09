@@ -20,6 +20,8 @@ class BitcoinExchange{
 		std::map<std::string, std::string> mp;
 	public:
 		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange &copy);
+		BitcoinExchange &operator=(const BitcoinExchange &copy);
 		void read_data();
 		void read_input(std::string &av);
 		~BitcoinExchange();

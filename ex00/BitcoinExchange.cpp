@@ -6,6 +6,13 @@ BitcoinExchange::BitcoinExchange(){
 BitcoinExchange::~BitcoinExchange(){
 
 }
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy){
+	*this = copy;
+}
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy){
+	this->mp = copy.mp;
+	return *this;
+}
 
 void BitcoinExchange::read_data(){
         std::ifstream input("data.csv");
@@ -50,7 +57,7 @@ int check_line(std::string key){
 	return 0;
 }
 
-size_t ft_strlen(char *str){
+size_t	ft_strlen(char *str){
 	size_t i = 0;
 	while (str[i])
 		i++;
@@ -81,7 +88,6 @@ double check_value(std::string value){
 }
 
 void BitcoinExchange::read_input(std::string &av){
-	// data t;
 	std::ifstream input(av.c_str());
 	std::string line;
 	std::getline(input, line);
@@ -116,10 +122,7 @@ void BitcoinExchange::read_input(std::string &av){
 			double sec = std::strtod(it->second.c_str() , NULL);
 			double vl = std::strtod(value.c_str() , NULL);
 			std::cout << key << " => " << value << " = " << sec * vl << std::endl;
-		}
-		
+		}	
 	}
-
-	}
-// }
+}
 
