@@ -39,7 +39,7 @@ void BitcoinExchange::read_data(){
 			exit(2);
 		}
 }
-int check_line(std::string key){
+static int check_line(std::string key){
 	if(key.length() != 10 || (key[4] != '-' || key[7] != '-'))
 		return 1;
 	for(size_t i = 0; i < key.length(); i++){
@@ -57,13 +57,13 @@ int check_line(std::string key){
 	return 0;
 }
 
-size_t	ft_strlen(char *str){
+static size_t	ft_strlen(char *str){
 	size_t i = 0;
 	while (str[i])
 		i++;
 	return i;
 }
-double check_value(std::string value){
+static double check_value(std::string value){
 	for (size_t i = 0; i < value.length(); i++){
 		if(value[i] != ' ' && !isdigit(value[i]) && value[i] != '.' && value[i] != '-'){
 			std::cerr << "Error: bad input => " + value << std::endl;
@@ -103,7 +103,6 @@ void BitcoinExchange::read_input(std::string &av){
 		}
 		std::string key = line.substr(0, pos - 1);
 		std::string value = line.substr(pos + 2);
-		// try{	
 		if(check_line(key)){
 			std::cerr << "Error: bad input => " + key << std::endl;
 			continue;

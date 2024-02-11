@@ -106,8 +106,6 @@ static PmergeMe::vec1 swapvec(PmergeMe::vec1 vec1, PmergeMe::vec1 vec2){
 	return vec;
 }
 
-
-
 PmergeMe::vec1 PmergeMe::merge() {
 	vec1 tmp;
 	vec2 newArr;

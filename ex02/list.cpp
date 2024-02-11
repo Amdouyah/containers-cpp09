@@ -1,7 +1,5 @@
 #include "PmergeMe.hpp"
 
-int _count = 0;
-
 static void	print_list(PmergeMe::list2 arr) {
 	  std::cout << "listo";
     for (PmergeMe::list2::iterator it = arr.begin(); it != arr.end(); ++it) {
@@ -12,7 +10,7 @@ static void	print_list(PmergeMe::list2 arr) {
         std::cout << " ]";
     }
     std::cout << std::endl;
-    std::cerr << "count == " << _count << "\n";
+    // std::cerr << "count == " << _count << "\n";
 }
 
 static void check_dup_list(PmergeMe::list1 lst){
@@ -57,12 +55,10 @@ static	void mainfunc_list(PmergeMe::list1 &lst, PmergeMe::list2 &Seclst) {
 static PmergeMe::list1 swaplst(PmergeMe::list1 list1, PmergeMe::list1 list2){
 	PmergeMe::list1 lst;
     if (list1.back() < list2.back()) {
-		_count++;
         lst.insert(lst.end(), list1.begin(), list1.end());
         lst.insert(lst.end(), list2.begin(), list2.end());
     }
 	else {
-		_count++;
         lst.insert(lst.end(), list2.begin(), list2.end());
         lst.insert(lst.end(), list1.begin(), list1.end());
     }
@@ -109,7 +105,6 @@ static void spltlst(PmergeMe::list2 &arr){
 	arr = newlst;
 }
 static bool	compare(PmergeMe::list1 v1, PmergeMe::list1 v2){
-	_count++;
 	return (v1.back() < v2.back());
 }
 

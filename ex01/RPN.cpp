@@ -1,18 +1,15 @@
 #include "RPN.hpp"
 
-// int check_(std::string str){
-	
-// 	if (str[0] != ' ' && !isdigit(str[0]) && str[0] != '*'
-// 		&& str[0] != '+' && str[0] != '-' && str[0] != '/')
-// 			return 0;
-// }
 int calcul(int a, int b, char c){
 	if (c == '*')
 		return (a * b);
 	else if (c == '+')
 		return (a + b);
-	else if (c == '/')
+	else if (c == '/'){
+		if (b == 0)
+			throw std::runtime_error("Error");
 		return (a / b);
+	}
 	else if (c == '-')
 		return (a - b);
 	return 0;
@@ -35,7 +32,6 @@ void rpn(std::string s){
 				stk.pop();
 				int top2 = stk.top();
 				stk.pop();
-				// std::cout << top1 << "****"<< top2 << std::endl;
 				stk.push(calcul(top2, top1, str[0]));
 			}
 		}
