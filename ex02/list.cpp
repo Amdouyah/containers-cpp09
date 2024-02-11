@@ -1,18 +1,5 @@
 #include "PmergeMe.hpp"
 
-static void	print_list(PmergeMe::list2 arr) {
-	  std::cout << "listo";
-    for (PmergeMe::list2::iterator it = arr.begin(); it != arr.end(); ++it) {
-        std::cout << " [";
-        for (std::list<int>::iterator innerIt = it->begin(); innerIt != it->end(); ++innerIt) {
-            std::cout << " " << *innerIt;
-        }
-        std::cout << " ]";
-    }
-    std::cout << std::endl;
-    // std::cerr << "count == " << _count << "\n";
-}
-
 static void check_dup_list(PmergeMe::list1 lst){
 
 	for (PmergeMe::list1::iterator it1 = lst.begin(); it1 != lst.end(); ++it1) {
@@ -145,7 +132,6 @@ void PmergeMe::Linsert_(list1 tmp){
 void PmergeMe::Lsort(){
 	list1 tmp;
 	tmp = Lmerge();
-	print_list(Larr);
 	if(Larr.size() > 1){
 		Lsort();
 	}
@@ -153,9 +139,12 @@ void PmergeMe::Lsort(){
 }
 
 void	PmergeMe::Llaunch(int ac, char **av) {
+	clock_t start = clock();
 	check_errors_list(ac, av, Ldata);
 	check_dup_list(Ldata);
 	mainfunc_list(Ldata, Larr);
 	Lsort();
-	print_list(Larr);
+	clock_t end = clock();
+	std::cout << "Time to process a range of " << Larr.size() << " elemens with std::list : " << double(end - start) / CLOCKS_PER_SEC * 1000000 << " us\n";
+
 }

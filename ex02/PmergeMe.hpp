@@ -2,6 +2,7 @@
 #define PMERGEME_HPP
 
 #include <iostream>
+#include <ctime>
 #include <vector>
 #include <list>
 
@@ -20,8 +21,8 @@ class PmergeMe {
 		list2 Larr;
 	public:
 		PmergeMe();
-		// PmergeMe(const PmergeMe& copy);
-		// PmergeMe& operator=(const PmergeMe& copy);
+		PmergeMe(const PmergeMe& copy);
+		PmergeMe& operator=(const PmergeMe& copy);
 		~PmergeMe();
 
 		void	launch(int ac, char **av);

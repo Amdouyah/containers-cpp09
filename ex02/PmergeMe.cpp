@@ -20,18 +20,14 @@ PmergeMe::~PmergeMe() {
 int count = 0;
 
 static void	print(PmergeMe::vec2 arr) {
-	std::cout << "VecofVec";
-	for (int i = 0; i < (int)arr.size(); i++) {
-		arr[i];
-		arr[i+1];
-		std::cout << " [";
-		for (int j = 0; j < (int)arr[i].size(); j++) {
+	for (size_t i = 0; i < arr.size(); i++) {
+		// arr[i];
+		// arr[i+1];
+		for (size_t j = 0; j < arr[i].size(); j++) {
 			std::cout << " " << arr[i][j];
 		}
-		std::cout << " ]";
 	}
 	std::cout << std::endl;
-	std::cerr << "count == " << count << "\n";
 }
 
 static void check_dup(PmergeMe::vec1 vc){
@@ -75,11 +71,17 @@ static	void mainfunc(PmergeMe::vec1 &vec, PmergeMe::vec2 &Secvec) {
 }
 
 void	PmergeMe::launch(int ac, char **av) {
+	clock_t start = clock();
 	check_errors(ac, av, data);
 	check_dup(data);
 	mainfunc(data, arr);
-	sort();
+	std::cout << "Before ";
 	print(arr);
+	sort();
+	clock_t end = clock();
+	std::cout << "After ";
+	print(arr);
+	std::cout << "Time to process a range of " << arr.size() << " elemens with std::vector : " << double(end - start) / CLOCKS_PER_SEC * 1000000 << " us\n";
 }
 
 
