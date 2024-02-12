@@ -81,7 +81,7 @@ static double check_value(std::string value){
 		return(-1);
 	}
 	if(val > 1000){
-		std::cerr << "Error: too large a numbe" << std::endl;
+		std::cerr << "Error: too large a number" << std::endl;
 		return(-1);
 	}
 	return(val);

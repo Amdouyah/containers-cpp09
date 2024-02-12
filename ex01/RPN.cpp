@@ -1,6 +1,6 @@
 #include "RPN.hpp"
 
-int calcul(int a, int b, char c){
+static int calcul(int a, int b, char c){
 	if (c == '*')
 		return (a * b);
 	else if (c == '+')
@@ -34,6 +34,8 @@ void rpn(std::string s){
 				stk.pop();
 				stk.push(calcul(top2, top1, str[0]));
 			}
+			else
+				throw std::runtime_error("Error");
 		}
 	}
 	if(stk.size() > 1)

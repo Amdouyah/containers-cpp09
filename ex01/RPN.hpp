@@ -5,7 +5,6 @@
 #include <stack>
 #include <sstream>
 
-int check_(std::string str);
 void rpn(std::string s);
 
 #endif

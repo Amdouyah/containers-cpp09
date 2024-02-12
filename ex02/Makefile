@@ -4,7 +4,7 @@ CC = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp PmergeMe.cpp list.cpp
+SRC = main.cpp PmergeMe.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 
